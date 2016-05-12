@@ -1,5 +1,5 @@
 define([
-    '../src/utils/markdown_toolbar_controller'
+    '../src/markdown_toolbar_controller'
 ], function(MarkdownToolbarController) {
     test('should render prefixes correctly', function() {
         var text = 'abcdefg';
@@ -52,7 +52,6 @@ define([
         strictEqual(c.render(data, 6, 6, text), rendered);
         strictEqual(c.selectionStart, 8);
         strictEqual(c.selectionEnd, 8);
-
 
         text = 'abcdef';
         rendered = '**abcdef**';
@@ -112,7 +111,7 @@ define([
         strictEqual(c.selectionEnd, 17);
     });
 
-    test('should render lists correctly', function() {
+    test('should render ul lists correctly', function() {
         var text = 'abcdef';
         var data = {
             'prefix': '- ',
@@ -151,5 +150,46 @@ define([
         strictEqual(c.render(data, 0, text.length, text), rendered);
         strictEqual(c.selectionStart, 0);
         strictEqual(c.selectionEnd, 19);
+    });
+
+    test('should render ol lists correctly', function() {
+        var text = 'abcdef';
+        var data = {
+            'prefix': '1. ',
+            'multiline': true
+        };
+        var rendered = 'abcdef1. ';
+        var c = new MarkdownToolbarController();
+        strictEqual(c.render(data, text.length, text.length, text), rendered);
+        strictEqual(c.selectionStart, 0);
+        strictEqual(c.selectionEnd, 9);
+
+        text = 'abcdef';
+        rendered = '1. abcdef';
+        c = new MarkdownToolbarController();
+        strictEqual(c.render(data, 0, text.length, text), rendered);
+        strictEqual(c.selectionStart, 0);
+        strictEqual(c.selectionEnd, 9);
+
+        text = 'abcdef\nabcdef';
+        rendered = '1. abcdef\n2. abcdef';
+        c = new MarkdownToolbarController();
+        strictEqual(c.render(data, 0, 13, text), rendered);
+        strictEqual(c.selectionStart, 0);
+        strictEqual(c.selectionEnd, 19);
+
+        text = 'abcdef\nabcdef\n';
+        rendered = '1. abcdef\n2. abcdef\n3. ';
+        c = new MarkdownToolbarController();
+        strictEqual(c.render(data, 0, text.length, text), rendered);
+        strictEqual(c.selectionStart, 0);
+        strictEqual(c.selectionEnd, 23);
+
+        text = 'abcd\nabcd\nabc';
+        rendered = '1. abcd\n2. abcd\n3. abc';
+        c = new MarkdownToolbarController();
+        strictEqual(c.render(data, 0, text.length, text), rendered);
+        strictEqual(c.selectionStart, 0);
+        strictEqual(c.selectionEnd, 22);
     });
 });

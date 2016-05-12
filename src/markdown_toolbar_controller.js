@@ -7,6 +7,22 @@ define([
         this.selectionEnd = null;
     };
 
+    /**
+     * Given a multiline text string, replace the newlines with
+     * ascending numbers to make an ordered list.
+     */
+    MarkdownToolbarController.prototype.makeOrderedList = function(text) {
+        var lines = text.split(/\r?\n|↵/);
+        var i;
+        for (i = 0; i < lines.length; i++) {
+            lines[i] = (i + 1) + '. ' + lines[i];
+            if (i > 0) {
+                lines[i] = '\n' + lines[i];
+            }
+        }
+        return lines.join('');
+    };
+
     MarkdownToolbarController.prototype.render = function(
         d, selectionStart, selectionEnd, text
     ) {
@@ -59,8 +75,13 @@ define([
             var before = text.substr(0, selectionStart);
             var snippet = text.substr(selectionStart, selectionEnd);
             var after = text.substr(selectionEnd, text.length);
-            snippet = snippet.replace(/^/, d.prefix);
-            snippet = snippet.replace(/\n/g, '\n' + d.prefix);
+            if (d.prefix === '1. ') {
+                // Create the numbered list
+                snippet = this.makeOrderedList(snippet);
+            } else {
+                snippet = snippet.replace(/^/, d.prefix);
+                snippet = snippet.replace(/\n/g, '\n' + d.prefix);
+            }
             s = before + snippet + after;
         } else {
             s = text.substr(0, selectionStart);
