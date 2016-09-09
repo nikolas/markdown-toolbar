@@ -1,0 +1,26 @@
+{
+  "name": "markdown-toolbar",
+  "version": "1.0.0",
+  "description": "A clone of GitHub's markdown toolbar",
+  "main": "./src/markdown_toolbar.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolas/markdown-toolbar.git"
+  },
+  "keywords": [
+    "markdown",
+    "commonmark"
+  ],
+  "author": "Nik Nyby",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/nikolas/markdown-toolbar/issues"
+  },
+  "homepage": "https://github.com/nikolas/markdown-toolbar#readme"
+}
