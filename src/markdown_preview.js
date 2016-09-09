@@ -7,8 +7,8 @@ define([
     '../libs/linkify/linkify-html.min'
 ], function(commonmark, emoji) {
     var MarkdownPreview = function($textarea, $previewArea) {
-        this.reader = commonmark.Parser();
-        this.writer = commonmark.HtmlRenderer();
+        this.reader = new commonmark.Parser();
+        this.writer = new commonmark.HtmlRenderer();
         this.$textarea = $textarea;
         this.$previewArea = $previewArea;
         this._startEventHandler();
