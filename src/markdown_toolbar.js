@@ -1,3 +1,5 @@
+/* global define */
+
 define([
     'jquery',
     'utils/markdown_toolbar_controller'
@@ -14,7 +16,7 @@ define([
     MarkdownToolbar.prototype.init = function() {
         var me = this;
 
-        this.$toolbar.find('button.js-toolbar-item').on('click', function(e) {
+        this.$toolbar.find('button.js-toolbar-item').on('click', function() {
             var $this = $(this);
 
             // Get data from button element
@@ -55,7 +57,7 @@ define([
             }
         });
 
-        this.$textarea.on('keyup', function(e) {
+        this.$textarea.on('keyup', function() {
             me.lastHotkey = null;
         });
     };
