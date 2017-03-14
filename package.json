@@ -8,7 +8,7 @@
   },
   "scripts": {
     "eslint": "eslint src/*.js",
-    "test": "make test"
+    "test": "mocha tests/"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/nikolas/markdown-toolbar#readme",
   "devDependencies": {
-    "eslint": "^3.17.1"
+    "eslint": "^3.17.1",
+    "mocha": "^3.2.0"
   }
 }

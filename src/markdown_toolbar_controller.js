@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 var MarkdownToolbarController = function() {
     this.prefixLength = null;
     this.selectionStart = null;
@@ -117,3 +119,7 @@ MarkdownToolbarController.prototype.renderBlockSuffix = function(
     s += text.substr(selectionEnd, text.length);
     return s;
 };
+
+if (typeof module !== 'undefined') {
+    module.exports = { MarkdownToolbarController: MarkdownToolbarController };
+}
