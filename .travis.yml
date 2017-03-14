@@ -5,3 +5,4 @@ before_script:
   - npm install
 script:
   - npm run eslint
+  - npm test
