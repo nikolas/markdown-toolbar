@@ -1,39 +1,21 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 
 define([
-    '../libs/commonmark.min',
-    '../libs/js-emoji/emoji.min',
-    '../libs/linkify/linkify.min',
-    '../libs/linkify/linkify-html.min'
-], function(commonmark, emoji) {
+    'utils/markdown_renderer'
+], function(MarkdownRenderer) {
     var MarkdownPreview = function($textarea, $previewArea) {
-        this.reader = new commonmark.Parser();
-        this.writer = new commonmark.HtmlRenderer();
+
+        this.renderer = new MarkdownRenderer();
         this.$textarea = $textarea;
         this.$previewArea = $previewArea;
         this._startEventHandler();
-        if (window.STATIC_URL) {
-            emoji.sheet_path = window.STATIC_URL +
-                'emoji-data/sheet_apple_64.png';
-        }
-        emoji.use_sheet = true;
-        // Temporary workaround for img_path issue:
-        // https://github.com/iamcal/js-emoji/issues/47
-        emoji.img_sets[emoji.img_set].sheet = emoji.sheet_path;
     };
 
     /**
      * Refresh the markdown preview, given the source text.
      */
     MarkdownPreview.prototype.refresh = function(text) {
-        var parsed = this.reader.parse(text);
-        var rendered = this.writer.render(parsed);
-        if (typeof window.linkifyHtml === 'function') {
-            rendered = window.linkifyHtml(rendered);
-        }
-        if (typeof emoji.replace_colons === 'function') {
-            rendered = emoji.replace_colons(rendered);
-        }
+        var rendered = this.renderer.render(text);
         this.$previewArea.html(rendered);
     };
 
