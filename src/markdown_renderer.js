@@ -1,4 +1,4 @@
-/* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+/* global define */
 
 define([
     '../../libs/commonmark.min',

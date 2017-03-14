@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "eslint": "eslint src/*.js",
     "test": "make test"
   },
   "repository": {
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/nikolas/markdown-toolbar/issues"
   },
-  "homepage": "https://github.com/nikolas/markdown-toolbar#readme"
+  "homepage": "https://github.com/nikolas/markdown-toolbar#readme",
+  "devDependencies": {
+    "eslint": "^3.17.1"
+  }
 }

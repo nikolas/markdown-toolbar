@@ -1,8 +1,9 @@
-/* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+/* global define */
 
 define([
+    'jquery',
     'utils/markdown_renderer'
-], function(MarkdownRenderer) {
+], function($, MarkdownRenderer) {
     var MarkdownPreview = function($textarea, $previewArea) {
 
         this.renderer = new MarkdownRenderer();
