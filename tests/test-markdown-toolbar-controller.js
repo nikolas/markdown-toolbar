@@ -1,3 +1,6 @@
+/* eslint-env mocha */
+/* eslint-env node */
+
 var assert = require('assert');
 var MarkdownToolbarController = require(
     '../src/markdown-toolbar.js').MarkdownToolbarController;
