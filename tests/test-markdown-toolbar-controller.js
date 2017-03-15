@@ -1,6 +1,6 @@
 var assert = require('assert');
 var MarkdownToolbarController = require(
-    '../src/markdown_toolbar_controller.js').MarkdownToolbarController;
+    '../src/markdown-toolbar.js').MarkdownToolbarController;
 
 describe('MarkdownToolbarController', function() {
     it('should render prefixes correctly', function() {

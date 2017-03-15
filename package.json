@@ -27,5 +27,8 @@
   "devDependencies": {
     "eslint": "^3.17.1",
     "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
   }
 }
