@@ -2,7 +2,7 @@
   "name": "markdown-toolbar",
   "version": "1.0.0",
   "description": "A clone of GitHub's markdown toolbar",
-  "main": "./src/markdown_toolbar.js",
+  "main": "./src/markdown-toolbar.js",
   "directories": {
     "test": "test"
   },
