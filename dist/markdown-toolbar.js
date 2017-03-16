@@ -1,15 +1,15 @@
 /* global define, jQuery, commonmark, emoji */
-/* global require */
+/* global require, module */
 
 (function(factory) {
     if (typeof define === 'function' && define.amd) {
-        define(['jquery'], factory);
+        define(['jquery', 'commonmark'], factory);
     } else if (typeof exports === 'object') {
-        factory(require('jquery'));
+        factory(require('jquery'), require('commonmark'));
     } else {
-        factory(jQuery);
+        factory(jQuery, commonmark);
     }
-}(function($) {
+}(function($, commonmark) {
     var MarkdownRenderer = function() {
         this.reader = new commonmark.Parser();
         this.writer = new commonmark.HtmlRenderer();
@@ -34,7 +34,9 @@
     MarkdownRenderer.prototype.render = function(text) {
         var parsed = this.reader.parse(text);
         var rendered = this.writer.render(parsed);
-        if (typeof window.linkifyHtml === 'function') {
+        if (typeof window !== 'undefined' &&
+            typeof window.linkifyHtml === 'function'
+           ) {
             rendered = window.linkifyHtml(rendered);
         }
         if (typeof emoji !== 'undefined' &&
@@ -348,6 +350,9 @@
     }
 
     if (typeof module !== 'undefined') {
-        module.exports = { MarkdownToolbarController: MarkdownToolbarController };
+        module.exports = {
+            MarkdownRenderer: MarkdownRenderer,
+            MarkdownToolbarController: MarkdownToolbarController
+        };
     }
 }));
