@@ -36,12 +36,12 @@
         var rendered = this.writer.render(parsed);
         if (typeof window !== 'undefined' &&
             typeof window.linkifyHtml === 'function'
-           ) {
+        ) {
             rendered = window.linkifyHtml(rendered);
         }
         if (typeof emoji !== 'undefined' &&
             typeof emoji.replace_colons === 'function'
-           ) {
+        ) {
             rendered = emoji.replace_colons(rendered);
         }
         return rendered;
@@ -99,7 +99,7 @@
         if (selectedText.match(/\n/) &&
             d.blockPrefix &&
             d.blockSuffix
-           ) {
+        ) {
             if (d.blockPrefix) {
                 text = this.renderBlockPrefix(
                     selectionStart, selectionEnd, d, text);
@@ -238,7 +238,7 @@
             // Refresh the preview view if it exists.
             if (me.markdownPreview &&
                 typeof me.markdownPreview.refresh === 'function'
-               ) {
+            ) {
                 me.markdownPreview.refresh(me.$textarea.val());
             }
         });
