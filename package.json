@@ -26,7 +26,7 @@
   "homepage": "https://github.com/nikolas/markdown-toolbar#readme",
   "devDependencies": {
     "eslint": "^4.3.0",
-    "mocha": "^3.2.0"
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "commonmark": "^0.28.1",
