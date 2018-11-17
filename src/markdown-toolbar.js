@@ -36,12 +36,12 @@
         var rendered = this.writer.render(parsed);
         if (typeof window !== 'undefined' &&
             typeof window.linkifyHtml === 'function'
-           ) {
+        ) {
             rendered = window.linkifyHtml(rendered);
         }
         if (typeof emoji !== 'undefined' &&
             typeof emoji.replace_colons === 'function'
-           ) {
+        ) {
             rendered = emoji.replace_colons(rendered);
         }
         return rendered;
@@ -100,7 +100,7 @@
         if (selectedText.match(/\n/) &&
             d.blockPrefix &&
             d.blockSuffix
-           ) {
+        ) {
             if (d.blockPrefix) {
                 text = this.renderBlockPrefix(
                     selectionStart, selectionEnd, d, text);
@@ -221,9 +221,9 @@
             if (buttonData.hotkey === 'p') {
                 if (me.markdownPreview) {
                     me.markdownPreview.refresh(me.$textarea.val());
-                    if (me.markdownPreview.$previewArea.attr("auto_preview") === true) {
+                    if (me.markdownPreview.$previewArea.attr('auto_preview') === true) {
                         me.markdownPreview.$previewArea.show();
-                        me.markdownPreview.$previewArea.attr("auto_preview", false);
+                        me.markdownPreview.$previewArea.attr('auto_preview', false);
                     } else {
                         me.markdownPreview.$previewArea.toggle();
                     }
@@ -237,7 +237,7 @@
                 me.lastHotkey = null;
             } else {
                 if (buttonData.hotkey === me.lastHotkey && buttonData.hotkey === 'h') {
-                    buttonData.prefix = "#";
+                    buttonData.prefix = '#';
                 }
                 var mtc = new MarkdownToolbarController();
                 me.lastText = text;
@@ -257,7 +257,7 @@
             // Refresh the preview view if it exists.
             if (me.markdownPreview &&
                 typeof me.markdownPreview.refresh === 'function'
-               ) {
+            ) {
                 me.markdownPreview.refresh(me.$textarea.val());
                 me.markdownPreview.$previewArea.width(me.$textarea.outerWidth());
             }
@@ -411,7 +411,7 @@
             } else {
                 auto_preview = true;
             }
-            $preview.attr("auto_preview", auto_preview);
+            $preview.attr('auto_preview', auto_preview);
             $this.after($preview);
             var markdownPreview = undefined;
             markdownPreview = new MarkdownPreview($this, $preview);
