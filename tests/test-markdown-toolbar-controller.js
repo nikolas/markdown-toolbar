@@ -208,16 +208,16 @@ describe('MarkdownToolbarController', function() {
         assert.strictEqual(c.selectionStart, 8);
         assert.strictEqual(c.selectionEnd, 8);
 
-        var text = 'abcdef';
-        var rendered = '# abcdef';
-        var c = new MarkdownToolbarController();
+        text = 'abcdef';
+        rendered = '# abcdef';
+        c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, 0, text.length, text), rendered);
         assert.strictEqual(c.selectionStart, 2);
         assert.strictEqual(c.selectionEnd, 8);
 
-        var text = '# abcdef';
-        var rendered = '## abcdef';
-        var c = new MarkdownToolbarController();
+        text = '# abcdef';
+        rendered = '## abcdef';
+        c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, 2, text.length, text), rendered);
         assert.strictEqual(c.selectionStart, 3);
         assert.strictEqual(c.selectionEnd, 9);

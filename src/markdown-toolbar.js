@@ -133,7 +133,7 @@
             }
         }
 
-        if (d.prefix === "#" && text.substr(selectionStart, 1) === '#') {
+        if (d.prefix === '#' && text.substr(selectionStart, 1) === '#') {
             selectionStart += 2;
         }
 
