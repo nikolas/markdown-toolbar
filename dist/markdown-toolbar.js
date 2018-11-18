@@ -96,7 +96,12 @@
         d, selectionStart, selectionEnd, text
     ) {
         var selectedText = text.substr(selectionStart, selectionEnd - selectionStart);
-        var selectionDiff = 0;
+        if (d.prefix === '# ' && selectionStart !== 0 && text.substr(selectionStart -2, 1) === '#') {
+            d.prefix = '#';
+            selectionStart -= 2;
+        }
+        var suffixdiff = 0;
+        var prefixdiff = 0;
         if (selectedText.match(/\n/) &&
             d.blockPrefix &&
             d.blockSuffix
@@ -104,36 +109,40 @@
             if (d.blockPrefix) {
                 text = this.renderBlockPrefix(
                     selectionStart, selectionEnd, d, text);
-                selectionDiff += d.blockPrefix.length + 1;
+                prefixdiff += d.blockPrefix.length + 1;
             }
 
             if (d.blockSuffix) {
                 text = this.renderBlockSuffix(
                     selectionStart, selectionEnd, d.blockPrefix.length,
                     d, text);
-                selectionDiff += d.blockSuffix.length + 1;
+                suffixdiff += d.blockSuffix.length + 1;
             }
         } else {
             if (d.prefix) {
                 text = this.renderPrefix(
                     selectionStart, selectionEnd, d, text);
-                selectionDiff += d.prefix.length;
+                prefixdiff += d.prefix.length;
             }
 
             if (d.suffix) {
                 text = this.renderSuffix(
                     selectionStart, selectionEnd, this.prefixLength,
                     d, text);
-                selectionDiff += d.suffix.length;
+                suffixdiff += d.suffix.length;
             }
+        }
+
+        if (d.prefix === '#' && text.substr(selectionStart, 1) === '#') {
+            selectionStart += 2;
         }
 
         if (d.multiline && selectedText.match(/\n/)) {
             this.selectionStart = selectionStart;
-            this.selectionEnd = selectionEnd + selectionDiff * (selectedText.match(/\n/g).length + 1);
+            this.selectionEnd = selectionEnd + (prefixdiff + suffixdiff) * (selectedText.match(/\n/g).length + 1);
         } else {
-            this.selectionStart = selectionStart;
-            this.selectionEnd = selectionEnd + selectionDiff;
+            this.selectionStart = selectionStart + prefixdiff;
+            this.selectionEnd = selectionEnd + prefixdiff;
         }
 
         return text;
@@ -232,13 +241,15 @@
                 return;
             } else if (buttonData.hotkey === me.lastHotkey && buttonData.hotkey !== 'h' && me.lastText) {
                 var diff = text.length - me.lastText.length;
-                selectionEnd -= diff;
+                if (buttonData.multiline) {
+                    selectionEnd -= diff;
+                } else {
+                    selectionStart -= diff / 2;
+                    selectionEnd -= diff / 2;
+                }
                 text = me.lastText;
                 me.lastHotkey = null;
             } else {
-                if (buttonData.hotkey === me.lastHotkey && buttonData.hotkey === 'h') {
-                    buttonData.prefix = '#';
-                }
                 var mtc = new MarkdownToolbarController();
                 me.lastText = text;
                 text = mtc.render(
@@ -316,7 +327,6 @@
                 'class="js-toolbar-item toolbar-item tooltipped tooltipped-n"' +
                 'title="Add a heading"' +
                 'tabindex="-1"' +
-                'data-multiline="true"' +
                 'data-prefix="# "' +
                 'data-hotkey="h"' +
                 'data-ga-click="Markdown Toolbar, click, heading"' +
