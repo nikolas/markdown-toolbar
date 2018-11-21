@@ -111,9 +111,9 @@ describe('MarkdownToolbarController', function() {
         text = 'abcdef\nabcdef\n';
         rendered = '```\nabcdef\nabcdef\n\n```';
         c = new MarkdownToolbarController();
-        assert.strictEqual(c.render(data, 0, 13, text), rendered);
+        assert.strictEqual(c.render(data, 0, text.length, text), rendered);
         assert.strictEqual(c.selectionStart, 4);
-        assert.strictEqual(c.selectionEnd, 17);
+        assert.strictEqual(c.selectionEnd, 18);
     });
 
     it('should render ul lists correctly', function() {
@@ -125,14 +125,14 @@ describe('MarkdownToolbarController', function() {
         var rendered = 'abcdef- ';
         var c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, text.length, text.length, text), rendered);
-        assert.strictEqual(c.selectionStart, 0);
+        assert.strictEqual(c.selectionStart, 8);
         assert.strictEqual(c.selectionEnd, 8);
 
         text = 'abcdef';
         rendered = '- abcdef';
         c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, 0, text.length, text), rendered);
-        assert.strictEqual(c.selectionStart, 0);
+        assert.strictEqual(c.selectionStart, 2);
         assert.strictEqual(c.selectionEnd, 8);
 
         text = 'abcdef\nabcdef';
@@ -166,14 +166,14 @@ describe('MarkdownToolbarController', function() {
         var rendered = 'abcdef1. ';
         var c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, text.length, text.length, text), rendered);
-        assert.strictEqual(c.selectionStart, 0);
+        assert.strictEqual(c.selectionStart, 9);
         assert.strictEqual(c.selectionEnd, 9);
 
         text = 'abcdef';
         rendered = '1. abcdef';
         c = new MarkdownToolbarController();
         assert.strictEqual(c.render(data, 0, text.length, text), rendered);
-        assert.strictEqual(c.selectionStart, 0);
+        assert.strictEqual(c.selectionStart, 3);
         assert.strictEqual(c.selectionEnd, 9);
 
         text = 'abcdef\nabcdef';
@@ -196,5 +196,31 @@ describe('MarkdownToolbarController', function() {
         assert.strictEqual(c.render(data, 0, text.length, text), rendered);
         assert.strictEqual(c.selectionStart, 0);
         assert.strictEqual(c.selectionEnd, 22);
+    });
+    it('should render headers correctly', function() {
+        var text = 'abcdef';
+        var data = {
+            'prefix': '# '
+        };
+        var rendered = 'abcdef# ';
+        var c = new MarkdownToolbarController();
+        assert.strictEqual(c.render(data, 6, 6, text), rendered);
+        assert.strictEqual(c.selectionStart, 8);
+        assert.strictEqual(c.selectionEnd, 8);
+
+        text = 'abcdef';
+        rendered = '# abcdef';
+        c = new MarkdownToolbarController();
+        assert.strictEqual(c.render(data, 0, text.length, text), rendered);
+        assert.strictEqual(c.selectionStart, 2);
+        assert.strictEqual(c.selectionEnd, 8);
+
+        text = '# abcdef';
+        rendered = '## abcdef';
+        c = new MarkdownToolbarController();
+        assert.strictEqual(c.render(data, 2, text.length, text), rendered);
+        assert.strictEqual(c.selectionStart, 3);
+        assert.strictEqual(c.selectionEnd, 9);
+
     });
 });
