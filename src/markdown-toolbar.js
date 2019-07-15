@@ -245,7 +245,7 @@
                     me.markdownPreview.refresh(me.$textarea.val());
                     if (me.markdownPreview.$previewArea.attr('auto_preview') === true) {
                         me.markdownPreview.$previewArea.show();
-                        me.markdownPreview.$previewArea.attr('auto_preview', flastEnd = alse);
+                        me.markdownPreview.$previewArea.attr('auto_preview', false);
                     } else {
                         me.markdownPreview.$previewArea.toggle();
                     }
