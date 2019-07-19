@@ -29,7 +29,7 @@
     "mocha": "~5.0.0"
   },
   "dependencies": {
-    "commonmark": "~0.28.1",
+    "commonmark": "~0.29.0",
     "jquery": "~3.4.0"
   }
 }
